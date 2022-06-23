@@ -1,0 +1,21 @@
+.minute, .second {
+    font-size:xx-large;
+}
+
+button {
+    font-size: larger;
+}
+
+.minuteur {
+    border-width: 1ex;
+    border-style: double;
+    font-size: larger;
+}
+
+.active {
+    background-color: cyan;
+}
+
+.alert {
+    background-color: red;
+}
