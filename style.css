@@ -1,5 +1,5 @@
 .minute, .second {
-    font-size:xx-large;
+    font-size: larger;
 }
 
 button {
@@ -22,4 +22,14 @@ button {
 
 .finish {
     background-color: red;
+}
+
+body {
+    font-size: 60px;
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 60px;
+    }
 }
