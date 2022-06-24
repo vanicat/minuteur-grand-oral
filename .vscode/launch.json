@@ -1,0 +1,19 @@
+{
+    "configurations": [
+        {
+            "type": "firefox",
+            "request": "launch",
+            "reAttach": true,
+            "name": "Launch index.html",
+            "file": "${workspaceFolder}/index.html",
+            "firefoxExecutable": "C:\\Program Files\\Mozilla Firefox\\firefox.exe"
+        },
+        {
+            "name": "Launch Chrome",
+            "request": "launch",
+            "type": "chrome",
+            "url": "${workspaceFolder}/index.html",
+            "webRoot": "${workspaceFolder}"
+        }
+    ]
+}

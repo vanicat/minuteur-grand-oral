@@ -58,10 +58,16 @@ Timer.prototype.update_display = function() {
     if(second_st.length < 2) second_st = '0' + second_st
     if(minute_st.length < 2) minute_st = '0' + minute_st
 
-    if(second === 0 || (minute === 0 && second < 5)){
+    if(second === 0 || (minute === 0 && 0 < second < 5)){
         navigator.vibrate(100)
         all.classList.add('alert')
     }
+
+    if(second <= 1 && minute <= 0) {
+        navigator.vibrate(100)
+        all.classList.add('finish')
+    }
+
     this.display.minute.innerHTML = minute_st
     this.display.second.innerHTML = second_st
 }

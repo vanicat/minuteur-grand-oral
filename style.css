@@ -17,5 +17,9 @@ button {
 }
 
 .alert {
+    background-color: rgb(255, 172, 47);
+}
+
+.finish {
     background-color: red;
 }
