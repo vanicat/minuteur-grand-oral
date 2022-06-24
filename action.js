@@ -126,6 +126,8 @@ var init = function() {
 
 var updateTimers = function() {
     all.classList.remove('alert')
+    all.classList.remove('finish')
+
     active.update_display()
     if(active.total_active) total.update_display()
 }
