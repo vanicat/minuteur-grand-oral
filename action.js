@@ -26,12 +26,12 @@ Timer.prototype.on_click = function() {
 
     this.activate()
     this.start()
-    if(! this.total_timer.started) total.start()
+    if(! this.total_timer.started) total_timer.start()
 }
 
 Timer.prototype.activate = function() {
-    active.stop()
-    active = this
+    active_timer.stop()
+    active_timer = this
 }
 
 Timer.prototype.start = function() {
@@ -57,12 +57,12 @@ Timer.prototype.update_display = function() {
 
     if(second === 0 || (minute === 0 && 0 < second && second < 10 && halfdiff < 0) ){
         navigator.vibrate(100)
-        all.classList.add('alert')
+        body.classList.add('alert')
     }
 
     if(second <= 1 && minute <= 0) {
         navigator.vibrate(100)
-        all.classList.add('finish')
+        body.classList.add('finish')
     }
 
     this.display.minute.innerHTML = minute_st
@@ -70,7 +70,7 @@ Timer.prototype.update_display = function() {
 }
 
 Timer.prototype.stop = function() {
-    active = noTimer
+    active_timer = noTimer
     this.display.classList.remove('active')
     this.started = false
     this.passed_time = new Date().getTime() - this.start_time
@@ -89,50 +89,50 @@ Timer.prototype.reset = function() {
 }
 
 Timer.prototype.pause = function() {
-    self.active = false
+    self.active_timer = false
     this.total_timer.stop()
     this.stop()
 }
 
 const reset_all = function() {
-    active.stop()
-    total.stop()
-    active = noTimer
+    active_timer.stop()
+    total_timer.stop()
+    active_timer = noTimer
 
-    for(const timer of [presentation, echange, orient, total]) {
+    for(const timer of [presentation_timer, echange_timer, orient_timer, total_timer]) {
         timer.reset()
     }
 }
 
-var presentation = null
-var echange = null
-var orient = null
-var total = null
-var reset = null
-var pause = null
-var active = noTimer
-var all = null
+var presentation_timer = null
+var echange_timer = null
+var orient_timer = null
+var total_timer = null
+var reset_button = null
+var pause_button = null
+var active_timer = noTimer
+var body = null
 
 var init = function() {
-    all = document.getElementsByTagName('body')[0]
-    total = new Timer(20, 'total')
-    orient = new Timer(5, 'orientation', total)
-    echange = new Timer(10, 'echange', total)
-    presentation = new Timer(5, 'presentation', total)
+    body = document.getElementsByTagName('body')[0]
+    total_timer = new Timer(20, 'total')
+    orient_timer = new Timer(5, 'orientation', total_timer)
+    echange_timer = new Timer(10, 'echange', total_timer)
+    presentation_timer = new Timer(5, 'presentation', total_timer)
 
-    reset = document.getElementById('reinit')
-    reset.onclick = reset_all
+    reset_button = document.getElementById('reinit')
+    reset_button.onclick = reset_all
 
-    pause = document.getElementById('pause')
-    pause.onclick = function () { active.pause() }
+    pause_button = document.getElementById('pause')
+    pause_button.onclick = function () { active_timer.pause() }
 
     setInterval(updateTimers, 500)
 }
 
 var updateTimers = function() {
-    all.classList.remove('alert')
-    all.classList.remove('finish')
+    body.classList.remove('alert')
+    body.classList.remove('finish')
 
-    active.update_display()
-    if(total.started) total.update_display()
+    active_timer.update_display()
+    if(total_timer.started) total_timer.update_display()
 }
