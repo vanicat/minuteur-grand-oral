@@ -107,6 +107,7 @@ var echange = null
 var orient = null
 var total = null
 var reset = null
+var pause = null
 var active = noTimer
 var all = null
 
@@ -119,6 +120,9 @@ var init = function() {
 
     reset = document.getElementById('reinit')
     reset.onclick = reset_all
+
+    pause = document.getElementById('pause')
+    pause.onclick = function () { active.pause() }
 
     setInterval(updateTimers, 1000)
 }
