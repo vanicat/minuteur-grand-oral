@@ -1,7 +1,6 @@
 const noTimer =  {
     stop: function() {},
     update_display: function () {},
-    total_active: false
 }
 
 const Timer = function(time, display_name, total) {
@@ -14,7 +13,6 @@ const Timer = function(time, display_name, total) {
     this.display.second = this.display.getElementsByClassName("second")[0]
     this.active = false
     this.timers = []
-    this.total_active = true
     this.total_timer = total
 
     const me = this
@@ -136,5 +134,5 @@ var updateTimers = function() {
     all.classList.remove('finish')
 
     active.update_display()
-    if(active.total_active) total.update_display()
+    if(total.active) total.update_display()
 }
