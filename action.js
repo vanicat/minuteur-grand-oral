@@ -55,12 +55,12 @@ Timer.prototype.update_display = function() {
     if(second_st.length < 2) second_st = '0' + second_st
     if(minute_st.length < 2) minute_st = '0' + minute_st
 
-    if(second === 0 || (minute === 0 && 0 < second && second < 10 && halfdiff < 0) ){
+    if(second === 0 || (minute === 0 && 0 <= second && second < 10 && halfdiff < 0) ){
         navigator.vibrate(100)
         body.classList.add('alert')
     }
 
-    if(second <= 1 && minute <= 0) {
+    if(second <= 0 && minute <= 0) {
         navigator.vibrate(100)
         body.classList.add('finish')
     }
