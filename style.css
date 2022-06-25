@@ -24,12 +24,14 @@ button {
     background-color: red;
 }
 
-body {
-    font-size: calc(5*(1vh+1vw)/2)
+@media only screen and (max-width: 600px) {
+    body {
+       font-size: 20px;
+    }
 }
 
-@media (max-width: 480px) {
+@media only screen and (min-width: 601px) {
     body {
-        font-size: 60px;
+        font-size: 30px;
     }
 }
