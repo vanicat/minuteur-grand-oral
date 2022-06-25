@@ -18,17 +18,6 @@ const Timer = function(time, display_name, total) {
 
     const me = this
     this.display.addEventListener('click', function () { me.on_click() })
-    
-
-    button = display.getElementsByClassName("next")
-    if(button.length > 0){   
-        button[0].addEventListener('click', function () {me.next()})
-    }
-
-    button = display.getElementsByClassName("reset")
-    if(button.length > 0){   
-        button[0].addEventListener('click', function () {me.reset()})
-    }
 }
 
 Timer.prototype.on_click = function() {
@@ -84,11 +73,6 @@ Timer.prototype.update_display = function() {
     this.display.second.innerHTML = second_st
 }
 
-Timer.prototype.next = function() {
-    this.next_timer.activate()
-    this.next_timer.start()
-}
-
 Timer.prototype.stop = function() {
     this.display.classList.remove('active')
     this.active = false
@@ -107,9 +91,6 @@ Timer.prototype.reset = function() {
 
 }
 
-Timer.prototype.reset_config = function(timers) {
-    this.timers = timers
-}
 
 var presentation = null
 var echange = null
@@ -125,7 +106,6 @@ var init = function() {
     echange = new Timer(10, 'echange', total)
     presentation = new Timer(5, 'presentation', total)
 
-    total.reset_config([presentation, echange, orient])
 
     setInterval(updateTimers, 1000)
 }
