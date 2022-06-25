@@ -42,7 +42,9 @@ Timer.prototype.start = function() {
 }
 
 Timer.prototype.update_display = function() {
-    var diff = Math.round((new Date().getTime() - this.start_time) / 1000)
+    var fulldiff = (new Date().getTime() - this.start_time) / 1000
+    var diff = Math.round(fulldiff)
+    var halfdiff =  fulldiff - diff
     var time_left = this.init_time - diff
 
     var second = time_left % 60
@@ -53,7 +55,7 @@ Timer.prototype.update_display = function() {
     if(second_st.length < 2) second_st = '0' + second_st
     if(minute_st.length < 2) minute_st = '0' + minute_st
 
-    if(second === 0 || (minute === 0 && 0 < second < 5)){
+    if(second === 0 || (minute === 0 && 0 < second && second < 10 && halfdiff < 0) ){
         navigator.vibrate(100)
         all.classList.add('alert')
     }
@@ -124,7 +126,7 @@ var init = function() {
     pause = document.getElementById('pause')
     pause.onclick = function () { active.pause() }
 
-    setInterval(updateTimers, 1000)
+    setInterval(updateTimers, 500)
 }
 
 var updateTimers = function() {
