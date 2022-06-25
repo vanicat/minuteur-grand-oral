@@ -74,9 +74,9 @@ Timer.prototype.stop = function() {
 }
 
 Timer.prototype.reset = function() {
-    active = noTimer
     this.display.classList.remove('active')
     this.start_time = new Date().getTime()
+    this.passed_time = 0
     this.update_display()
 
     for(const element of this.timers) {
@@ -85,11 +85,21 @@ Timer.prototype.reset = function() {
 
 }
 
+const reset_all = function() {
+    active.stop()
+    total.stop()
+    active = noTimer
+
+    for(const timer of [presentation, echange, orient, total]) {
+        timer.reset()
+    }
+}
 
 var presentation = null
 var echange = null
 var orient = null
 var total = null
+var reset = null
 var active = noTimer
 var all = null
 
@@ -100,6 +110,8 @@ var init = function() {
     echange = new Timer(10, 'echange', total)
     presentation = new Timer(5, 'presentation', total)
 
+    reset = document.getElementById('reinit')
+    reset.onclick = reset_all
 
     setInterval(updateTimers, 1000)
 }
