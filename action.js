@@ -8,12 +8,13 @@ const Timer = function(time, display_name, total) {
     this.init_time = time * 60
     this.passed_time = 0
     this.start_time = null
-    this.display = display
-    this.display.minute = this.display.getElementsByClassName("minute")[0]
-    this.display.second = this.display.getElementsByClassName("second")[0]
     this.active = false
     this.timers = []
     this.total_timer = total
+
+    this.display = display
+    this.display.minute = this.display.getElementsByClassName("minute")[0]
+    this.display.second = this.display.getElementsByClassName("second")[0]
 
     const me = this
     this.display.addEventListener('click', function () { me.on_click() })
