@@ -8,7 +8,7 @@ const Timer = function(time, display_name, total) {
     this.init_time = time * 60
     this.passed_time = 0
     this.start_time = null
-    this.active = false
+    this.started = false
     this.timers = []
     this.total_timer = total
 
@@ -21,7 +21,7 @@ const Timer = function(time, display_name, total) {
 }
 
 Timer.prototype.on_click = function() {
-    if(this.active) return
+    if(this.started) return
     if(this.total_timer === undefined) return
 
     this.activate()
@@ -35,7 +35,7 @@ Timer.prototype.activate = function() {
 }
 
 Timer.prototype.start = function() {
-    this.active = true
+    this.started = true
     this.display.classList.add('active')
     this.start_time = new Date().getTime() - this.passed_time
     this.update_display()
@@ -69,8 +69,8 @@ Timer.prototype.update_display = function() {
 
 Timer.prototype.stop = function() {
     this.display.classList.remove('active')
-    this.active = false
-    this.passed_time =new Date().getTime() - this.start_time
+    this.started = false
+    this.passed_time = new Date().getTime() - this.start_time
 }
 
 Timer.prototype.reset = function() {
