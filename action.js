@@ -24,15 +24,9 @@ Timer.prototype.on_click = function() {
     if(this.active) return
     if(this.total_timer === undefined) return
 
-    if(! this.total_timer.active) {
-        this.activate()
-        this.start()
-        total.start()
-        return
-    } else {
-        this.activate()
-        this.start()
-    }
+    this.activate()
+    this.start()
+    if(! this.total_timer.started) total.start()
 }
 
 Timer.prototype.activate = function() {
