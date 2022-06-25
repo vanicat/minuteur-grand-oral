@@ -1,4 +1,10 @@
-var Timer = function(time, display_name, total) {
+const noTimer =  {
+    stop: function() {},
+    update_display: function () {},
+    total_active: false
+}
+
+const Timer = function(time, display_name, total) {
     display = document.getElementById(display_name)
     this.init_time = time * 60
     this.passed_time = 0
@@ -91,11 +97,7 @@ Timer.prototype.stop = function() {
 }
 
 Timer.prototype.reset = function() {
-    active = {
-        stop: function() {},
-        update_display: function () {},
-        total_active: false
-    }
+    active = noTimer
     this.display.classList.remove('active')
     this.start_time = new Date().getTime()
     this.update_display()
@@ -114,11 +116,7 @@ var presentation = null
 var echange = null
 var orient = null
 var total = null
-var active = {
-    stop: function() {},
-    update_display: function () {},
-    total_active: false
-}
+var active = noTimer
 var all = null
 
 var init = function() {
