@@ -68,6 +68,7 @@ Timer.prototype.update_display = function() {
 }
 
 Timer.prototype.stop = function() {
+    active = noTimer
     this.display.classList.remove('active')
     this.started = false
     this.passed_time = new Date().getTime() - this.start_time
@@ -83,6 +84,12 @@ Timer.prototype.reset = function() {
         element.reset()
     }
 
+}
+
+Timer.prototype.pause = function() {
+    self.active = false
+    this.total_timer.stop()
+    this.stop()
 }
 
 const reset_all = function() {
@@ -121,5 +128,5 @@ var updateTimers = function() {
     all.classList.remove('finish')
 
     active.update_display()
-    if(total.active) total.update_display()
+    if(total.started) total.update_display()
 }
