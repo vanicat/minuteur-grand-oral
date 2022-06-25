@@ -24,6 +24,10 @@ button {
     background-color: red;
 }
 
+.reinit {
+    min-height: 2em;
+}
+
 @media only screen and (max-width: 600px) {
     body {
        font-size: 20px;

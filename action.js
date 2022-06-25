@@ -1,36 +1,43 @@
-var Timer = function(time, display_name, total, next) {
+var Timer = function(time, display_name, total) {
     display = document.getElementById(display_name)
     this.init_time = time * 60
+    this.passed_time = 0
     this.start_time = null
     this.display = display
     this.display.minute = this.display.getElementsByClassName("minute")[0]
     this.display.second = this.display.getElementsByClassName("second")[0]
     this.active = false
-    this.next_timer = next
-    this.total_timer = total
     this.timers = []
     this.total_active = true
+    this.total_timer = total
 
-    button = display.getElementsByClassName("start")
-    if(button.length > 0){   
-        var me = this
-        button[0].addEventListener('click', function () {
-            me.activate()
-            me.start()
-            total.start()
-        })
-    }
+    const me = this
+    this.display.addEventListener('click', function () { me.on_click() })
+    
 
     button = display.getElementsByClassName("next")
     if(button.length > 0){   
-        var me = this
         button[0].addEventListener('click', function () {me.next()})
     }
 
     button = display.getElementsByClassName("reset")
     if(button.length > 0){   
-        var me = this
         button[0].addEventListener('click', function () {me.reset()})
+    }
+}
+
+Timer.prototype.on_click = function() {
+    if(this.active) return
+    if(this.total_timer === undefined) return
+
+    if(! this.total_timer.active) {
+        this.activate()
+        this.start()
+        total.start()
+        return
+    } else {
+        this.activate()
+        this.start()
     }
 }
 
@@ -42,7 +49,7 @@ Timer.prototype.activate = function() {
 Timer.prototype.start = function() {
     this.active = true
     this.display.classList.add('active')
-    this.start_time = new Date().getTime()
+    this.start_time = new Date().getTime() - this.passed_time
     this.update_display()
 }
 
@@ -79,6 +86,8 @@ Timer.prototype.next = function() {
 
 Timer.prototype.stop = function() {
     this.display.classList.remove('active')
+    this.active = false
+    this.passed_time =new Date().getTime() - this.start_time
 }
 
 Timer.prototype.reset = function() {
@@ -116,8 +125,8 @@ var init = function() {
     all = document.getElementsByTagName('body')[0]
     total = new Timer(20, 'total')
     orient = new Timer(5, 'orientation', total)
-    echange = new Timer(10, 'echange', total, orient)
-    presentation = new Timer(5, 'presentation', total, echange)
+    echange = new Timer(10, 'echange', total)
+    presentation = new Timer(5, 'presentation', total)
 
     total.reset_config([presentation, echange, orient])
 
