@@ -6,7 +6,7 @@ button {
     font-size: larger;
 }
 
-.minuteur {
+.minuteur, .simplebutton {
     border-width: 1ex;
     border-style: double;
     font-size: larger;
@@ -24,7 +24,7 @@ button {
     background-color: red;
 }
 
-.reinit {
+.simplebutton {
     min-height: 2em;
 }
 
